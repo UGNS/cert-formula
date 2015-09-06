@@ -26,21 +26,21 @@ cert_packages:
   {% set key_dir = data.get('key_dir', map.key_dir) %}
 
 
-{{ cert_dir }}/{{ name }}:
+{{ cert_dir }}/{{ name }}.crt:
   file.managed:
     - source: salt://cert/{{ name }}
-    - user: {{ cert_user }}  
-    - group: {{ cert_group }}  
-    - mode: {{ cert_mode }}  
+    - user: {{ cert_user }}
+    - group: {{ cert_group }}
+    - mode: {{ cert_mode }}
 
   {% if key %}
 {{ key_dir }}/{{ name }}.key:
   file.managed:
     - contents: |
 {{ key|indent(8, True) }}
-    - user: {{ key_user }}  
-    - group: {{ key_group }}  
-    - mode: {{ key_mode }}  
+    - user: {{ key_user }}
+    - group: {{ key_group }}
+    - mode: {{ key_mode }}
   {% endif %}
 
 {% endfor %}
